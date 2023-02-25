@@ -1,31 +1,41 @@
-## GoIT Node.js Course Template Homework
+## API Contact List Manager
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+The project was created to simplify the management of your contact list.
 
-Додайте ментора до колаборації
+### Project launch commands:
 
-Для кожної домашньої роботи створюйте свою гілку.
+- `npm start` &mdash; start server in mode production
+- `npm run start:dev` &mdash; start server in mode development
+- `npm run lint` &mdash; run a code check execution with eslint
+- `npm run lint:fix` &mdash; the same eslint check, but with automatic fixes for
+  simple errors
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+Branch name and query command:
 
-Кожна нова гілка для др повинна робитися з master
+- "/" : Get all contacts(GET)
+- "/id" : Get contact by id (GET)
+- "/" : Add contact with body params (POST)
+- "/id" : Delete contact by id (DELETE)
+- "/id" : Update contact by id with body params: {name, email, phone} (PUT)
+- "/id/favorite" : Update contact favorite status by id with body param:
+  {favorite} (PATCH)
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+Contact object example:
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+```javascript
+{
+    "_id": "63fa4f0b201959e1b4c15e6a",
+    "name": "Alec Howard",
+    "email": "Donec.elementum@scelerisquescelerisquedui.net",
+    "phone": "(748) 206-2688",
+    "favorite": false
+}
+```
 
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
-
-### Команди:
-
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+| Field    | Description                            |
+| -------- | -------------------------------------- |
+| **id**   | The item's unique id (auto-generated). |
+| name     | Type: String, contact name.            |
+| email    | Type: String, contact email.           |
+| phone    | Type: String, contact phone.           |
+| favorite | Type: Boolean, default value: `false`. |
