@@ -12,13 +12,41 @@ The project was created to simplify the management of your contact list.
 
 Branch name and query command:
 
-- "/" : Get all contacts(GET)
-- "/id" : Get contact by id (GET)
-- "/" : Add contact with body params (POST)
-- "/id" : Delete contact by id (DELETE)
-- "/id" : Update contact by id with body params: {name, email, phone} (PUT)
-- "/id/favorite" : Update contact favorite status by id with body param:
-  {favorite} (PATCH)
+- "/api/users/signup" : Registration (POST)
+- "/api/users/login" : Log in (POST)
+- "/api/users/logout" : Log out (POST)
+- "/api/users/current" : Get information about current user (GET)
+- "/api/users/" : Update user's subscription status with body param:
+  {subscription} (PATCH)
+
+- "/api/contacts/" : Get all contacts(GET)
+- "/api/contacts/id" : Get contact by id (GET)
+- "/api/contacts/" : Add contact with body params (POST)
+- "/api/contacts/id" : Delete contact by id (DELETE)
+- "/api/contacts/id" : Update contact by id with body params: {name, email,
+  phone} (PUT)
+- "/api/contacts/id/favorite" : Update contact favorite status by id with body
+  param: {favorite} (PATCH)
+
+User object example:
+
+```javascript
+{
+    "_id": "63fa4f0b201959e1b4c15e6a",
+    "email": "Donec.elementum@scelerisquescelerisquedui.net",
+    "password": "54526kj62n36n6435",
+    "subscription": "starter",
+    "token": null
+}
+```
+
+| Field        | Description                                         |
+| ------------ | --------------------------------------------------- |
+| **id**       | The user's unique id (auto-generated).              |
+| email        | Type: String, contact email.                        |
+| password     | Type: String, contact password.                     |
+| subscription | Type: String, values: 'starter', 'pro', 'business'. |
+| token        | The user's unique jwt (auto-generated).             |
 
 Contact object example:
 
@@ -28,7 +56,8 @@ Contact object example:
     "name": "Alec Howard",
     "email": "Donec.elementum@scelerisquescelerisquedui.net",
     "phone": "(748) 206-2688",
-    "favorite": false
+    "favorite": false,
+    "owner": "63fa4f0b201959e1b4c15e6a"
 }
 ```
 
@@ -39,3 +68,4 @@ Contact object example:
 | email    | Type: String, contact email.           |
 | phone    | Type: String, contact phone.           |
 | favorite | Type: Boolean, default value: `false`. |
+| owner    | Type: ObjectId, unique owner's id      |
