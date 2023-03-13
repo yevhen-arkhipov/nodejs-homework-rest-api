@@ -10,18 +10,12 @@ const { DB_HOST_TEST, PORT } = process.env;
 
 describe('response test', () => {
   let server;
+  let response;
 
   beforeAll(async () => {
     await mongoose.connect(DB_HOST_TEST);
     server = app.listen(PORT);
-  });
 
-  afterAll(async () => {
-    server.close();
-    await mongoose.disconnect();
-  });
-
-  test('get response with token and user data to string', async () => {
     const hashPassword = await bcrypt.hash('123456', 10);
 
     await User.create({
@@ -30,24 +24,43 @@ describe('response test', () => {
       avatarURL:
         'https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?w=300&ssl=1',
     });
-    const response = await request(app)
+    response = await request(app)
       .post('/api/users/login')
       .send({ email: 'test@testmail.net', password: '123456' });
+  });
 
-    const {
-      statusCode,
-      body: {
-        token,
-        user: { email, subscription },
-      },
-    } = response;
+  afterAll(async () => {
+    server.close();
+    await mongoose.disconnect();
+  });
 
+  test('status - 200', () => {
+    const { statusCode } = response;
     expect(statusCode).toBe(200);
-    expect(token).toBeTruthy();
-    expect(email).toBeTruthy();
-    expect(subscription).toBeTruthy();
+  });
 
+  test('token - true', () => {
+    const { token } = response.body;
+    expect(token).toBeTruthy();
+  });
+
+  test('email - true', () => {
+    const { email } = response.body.user;
+    expect(email).toBeTruthy();
+  });
+
+  test('subscription - true', () => {
+    const { subscription } = response.body.user;
+    expect(subscription).toBeTruthy();
+  });
+
+  test('email is a string - true', () => {
+    const { email } = response.body.user;
     expect(typeof email).toBe('string');
+  });
+
+  test('subscription is a string - true', () => {
+    const { subscription } = response.body.user;
     expect(typeof subscription).toBe('string');
   });
 });
