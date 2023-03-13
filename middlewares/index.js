@@ -5,6 +5,8 @@ const isValidId = require('./isValidId');
 const validateAuthError = require('./validateAuthError');
 const authenticate = require('./authenticate');
 const validateUpdateSubscription = require('./validateUpdateSubscription');
+const upload = require('./upload');
+const jimpImageResizer = require('./jimpImageResizer');
 
 module.exports = {
   validateAddBody,
@@ -14,4 +16,6 @@ module.exports = {
   validateAuthError,
   authenticate,
   validateUpdateSubscription,
+  upload,
+  jimpImageResizer,
 };
