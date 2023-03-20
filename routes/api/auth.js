@@ -8,6 +8,7 @@ const {
   authenticate,
   upload,
   jimpImageResizer,
+  validateResendVerifyEmail,
 } = require('../../middlewares');
 
 const { schemas } = require('../../models/user');
@@ -15,6 +16,14 @@ const { schemas } = require('../../models/user');
 const router = express.Router();
 
 router.post('/signup', validateAuthError(schemas.singUpSchema), ctrl.singUp);
+
+router.get('/verify/:verificationToken', ctrl.verifyEmail);
+
+router.post(
+  '/verify',
+  validateResendVerifyEmail(schemas.emailSchema),
+  ctrl.resendVerifyEmail
+);
 
 router.post('/login', validateAuthError(schemas.logInSchema), ctrl.logIn);
 
