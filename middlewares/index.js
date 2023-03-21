@@ -7,6 +7,7 @@ const authenticate = require('./authenticate');
 const validateUpdateSubscription = require('./validateUpdateSubscription');
 const upload = require('./upload');
 const jimpImageResizer = require('./jimpImageResizer');
+const validateResendVerifyEmail = require('./validateResendVerifyEmail');
 
 module.exports = {
   validateAddBody,
@@ -18,4 +19,5 @@ module.exports = {
   validateUpdateSubscription,
   upload,
   jimpImageResizer,
+  validateResendVerifyEmail,
 };
